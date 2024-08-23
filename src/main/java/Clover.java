@@ -47,14 +47,49 @@ public class Clover {
                 System.out.println(" OK, I've marked this task as not done yet:");
                 System.out.println("   " + allTasks[index - 1]);
                 System.out.println("____________________________________________________________");
-                
-            } else {
-                // else, echo the command & show it is added
-                allTasks[counter] = new Task(command);
+
+            } else if (command.startsWith("todo ")) {
+                String description = command.substring(5).trim();
+                allTasks[counter] = new Todo(description);
                 counter++;
                 System.out.println("____________________________________________________________");
-                System.out.println("added: " + command);
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + allTasks[counter - 1]);
+                System.out.println(" Now you have " + counter + " tasks in the list.");
                 System.out.println("____________________________________________________________");
+
+            } else if (command.startsWith("deadline ")) {
+                String[] split = command.substring(9).split(" /by ");
+                String description = split[0].trim();
+                String date = split[1].trim();
+                allTasks[counter] = new Deadline(description, date);
+                counter++;
+                System.out.println("____________________________________________________________");
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + allTasks[counter - 1]);
+                System.out.println(" Now you have " + counter + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+
+            } else if (command.startsWith("event ")) {
+                String[] split = command.substring(6).split(" /from ");
+                String description = split[0].trim();
+                String[] times = split[1].split(" /to ");
+                String from = times[0].trim();
+                String to = times[1].trim();
+                allTasks[counter] = new Event(description, from, to);
+                counter++;
+                System.out.println("____________________________________________________________");
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + allTasks[counter - 1]);
+                System.out.println(" Now you have " + counter + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+
+            } else {
+                // else, unknown command
+                System.out.println("____________________________________________________________");
+                System.out.println(" Unknown command :( ");
+                System.out.println("____________________________________________________________");
+
             }
         }
         scanner.close();
