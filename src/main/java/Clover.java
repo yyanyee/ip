@@ -10,7 +10,7 @@ public class Clover {
         Scanner scanner = new Scanner(System.in);
         String command;
 
-        String[] allTasks = new String[100];
+        Task[] allTasks = new Task[100];
         int counter = 0;
 
         while (true) {
@@ -25,16 +25,35 @@ public class Clover {
             }
 
             if (command.equals("list")) {
-                // display tasks back to user
+                // display tasks back
                 System.out.println("____________________________________________________________");
+                System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < counter; i ++) {
                     System.out.println(" " + (i + 1) + "." + allTasks[i]);
                 }
                 System.out.println("____________________________________________________________");
             }
 
+            if (command.startsWith("mark ")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                allTasks[index - 1].markAsDone(); // [ ] -> [X]
+                System.out.println("____________________________________________________________");
+                System.out.println(" Nice! I've marked this task as done:");
+                System.out.println("   " + allTasks[index - 1]);
+                System.out.println("____________________________________________________________");
+            }
+
+            if (command.startsWith("unmark ")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                allTasks[index - 1].markAsUndone(); // [X] -> [ ]
+                System.out.println("____________________________________________________________");
+                System.out.println(" OK, I've marked this task as not done yet:");
+                System.out.println("   " + allTasks[index - 1]);
+                System.out.println("____________________________________________________________");
+            }
+
             // else, echo the command & show it is added
-            allTasks[counter] = command;
+            allTasks[counter] = new Task(command);
             counter++;
             System.out.println("____________________________________________________________");
             System.out.println("added: " + command);
