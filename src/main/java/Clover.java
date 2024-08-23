@@ -22,9 +22,8 @@ public class Clover {
                 System.out.println(" Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 break;
-            }
 
-            if (command.equals("list")) {
+            } else if (command.equals("list")) {
                 // display tasks back
                 System.out.println("____________________________________________________________");
                 System.out.println(" Here are the tasks in your list:");
@@ -32,32 +31,31 @@ public class Clover {
                     System.out.println(" " + (i + 1) + "." + allTasks[i]);
                 }
                 System.out.println("____________________________________________________________");
-            }
 
-            if (command.startsWith("mark ")) {
+            } else if (command.startsWith("mark ")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 allTasks[index - 1].markAsDone(); // [ ] -> [X]
                 System.out.println("____________________________________________________________");
                 System.out.println(" Nice! I've marked this task as done:");
                 System.out.println("   " + allTasks[index - 1]);
                 System.out.println("____________________________________________________________");
-            }
 
-            if (command.startsWith("unmark ")) {
+            } else if (command.startsWith("unmark ")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 allTasks[index - 1].markAsUndone(); // [X] -> [ ]
                 System.out.println("____________________________________________________________");
                 System.out.println(" OK, I've marked this task as not done yet:");
                 System.out.println("   " + allTasks[index - 1]);
                 System.out.println("____________________________________________________________");
+                
+            } else {
+                // else, echo the command & show it is added
+                allTasks[counter] = new Task(command);
+                counter++;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: " + command);
+                System.out.println("____________________________________________________________");
             }
-
-            // else, echo the command & show it is added
-            allTasks[counter] = new Task(command);
-            counter++;
-            System.out.println("____________________________________________________________");
-            System.out.println("added: " + command);
-            System.out.println("____________________________________________________________");
         }
         scanner.close();
     }
