@@ -18,14 +18,12 @@ public class Clover {
 
             if (command.equals("bye")) {
                 //exit if user types the command bye
-                System.out.println("____________________________________________________________");
                 System.out.println(" Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 break;
 
             } else if (command.equals("list")) {
                 // display tasks back
-                System.out.println("____________________________________________________________");
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < counter; i ++) {
                     System.out.println(" " + (i + 1) + "." + allTasks[i]);
@@ -35,24 +33,23 @@ public class Clover {
             } else if (command.startsWith("mark ")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 allTasks[index - 1].markAsDone(); // [ ] -> [X]
-                System.out.println("____________________________________________________________");
                 System.out.println(" Nice! I've marked this task as done:");
                 System.out.println("   " + allTasks[index - 1]);
                 System.out.println("____________________________________________________________");
 
+
             } else if (command.startsWith("unmark ")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 allTasks[index - 1].markAsUndone(); // [X] -> [ ]
-                System.out.println("____________________________________________________________");
                 System.out.println(" OK, I've marked this task as not done yet:");
                 System.out.println("   " + allTasks[index - 1]);
                 System.out.println("____________________________________________________________");
+
 
             } else if (command.startsWith("todo ")) {
                 String description = command.substring(5).trim();
                 allTasks[counter] = new Todo(description);
                 counter++;
-                System.out.println("____________________________________________________________");
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("   " + allTasks[counter - 1]);
                 System.out.println(" Now you have " + counter + " tasks in the list.");
@@ -64,7 +61,6 @@ public class Clover {
                 String date = split[1].trim();
                 allTasks[counter] = new Deadline(description, date);
                 counter++;
-                System.out.println("____________________________________________________________");
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("   " + allTasks[counter - 1]);
                 System.out.println(" Now you have " + counter + " tasks in the list.");
@@ -78,7 +74,6 @@ public class Clover {
                 String to = times[1].trim();
                 allTasks[counter] = new Event(description, from, to);
                 counter++;
-                System.out.println("____________________________________________________________");
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("   " + allTasks[counter - 1]);
                 System.out.println(" Now you have " + counter + " tasks in the list.");
@@ -86,7 +81,6 @@ public class Clover {
 
             } else {
                 // else, unknown command
-                System.out.println("____________________________________________________________");
                 System.out.println(" Unknown command :( ");
                 System.out.println("____________________________________________________________");
 
