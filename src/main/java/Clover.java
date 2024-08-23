@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Clover {
     public static void main(String[] args) {
@@ -10,8 +11,7 @@ public class Clover {
         Scanner scanner = new Scanner(System.in);
         String command;
 
-        Task[] allTasks = new Task[100];
-        int counter = 0;
+        ArrayList<Task> allTasks = new ArrayList<>();
 
         while (true) {
             command = scanner.nextLine();
@@ -27,26 +27,25 @@ public class Clover {
                 } else if (command.equals("list")) {
                     // display tasks back
                     System.out.println(" Here are the tasks in your list:");
-                    for (int i = 0; i < counter; i++) {
-                        System.out.println(" " + (i + 1) + "." + allTasks[i]);
+                    for (int i = 0; i < allTasks.size(); i++) {
+                        System.out.println(" " + (i + 1) + "." + allTasks.get(i));
                     }
                     System.out.println("____________________________________________________________");
 
                 } else if (command.startsWith("mark ")) {
                     int index = Integer.parseInt(command.split(" ")[1]);
-                    allTasks[index - 1].markAsDone(); // [ ] -> [X]
+                    allTasks.get(index - 1).markAsDone(); // [ ] -> [X]
                     System.out.println(" Nice! I've marked this task as done:");
-                    System.out.println("   " + allTasks[index - 1]);
+                    System.out.println("   " + allTasks.get(index - 1));
                     System.out.println("____________________________________________________________");
 
 
                 } else if (command.startsWith("unmark ")) {
                     int index = Integer.parseInt(command.split(" ")[1]);
-                    allTasks[index - 1].markAsUndone(); // [X] -> [ ]
+                    allTasks.get(index - 1).markAsUndone(); // [X] -> [ ]
                     System.out.println(" OK, I've marked this task as not done yet:");
-                    System.out.println("   " + allTasks[index - 1]);
+                    System.out.println("   " + allTasks.get(index - 1));
                     System.out.println("____________________________________________________________");
-
 
                 } else if (command.startsWith("todo ")) {
                     String description = command.substring(5).trim();
@@ -55,11 +54,10 @@ public class Clover {
                         throw new EmptyDescriptionException("description cannot be empty >:( ");
                     }
 
-                    allTasks[counter] = new Todo(description);
-                    counter++;
+                    allTasks.add(new Todo(description));
                     System.out.println(" Got it. I've added this task:");
-                    System.out.println("   " + allTasks[counter - 1]);
-                    System.out.println(" Now you have " + counter + " tasks in the list.");
+                    System.out.println("   " + allTasks.get(allTasks.size() - 1));
+                    System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
 
                 } else if (command.startsWith("deadline ")) {
@@ -70,11 +68,10 @@ public class Clover {
                     }
                     String description = split[0].trim();
                     String date = split[1].trim();
-                    allTasks[counter] = new Deadline(description, date);
-                    counter++;
+                    allTasks.add(new Deadline(description, date));
                     System.out.println(" Got it. I've added this task:");
-                    System.out.println("   " + allTasks[counter - 1]);
-                    System.out.println(" Now you have " + counter + " tasks in the list.");
+                    System.out.println("   " + allTasks.get(allTasks.size() - 1));
+                    System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
 
                 } else if (command.startsWith("event ")) {
@@ -83,11 +80,18 @@ public class Clover {
                     String[] times = split[1].split(" /to ");
                     String from = times[0].trim();
                     String to = times[1].trim();
-                    allTasks[counter] = new Event(description, from, to);
-                    counter++;
+                    allTasks.add(new Event(description, from, to));
                     System.out.println(" Got it. I've added this task:");
-                    System.out.println("   " + allTasks[counter - 1]);
-                    System.out.println(" Now you have " + counter + " tasks in the list.");
+                    System.out.println("   " + allTasks.get(allTasks.size() - 1));
+                    System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+
+                } else if (command.startsWith("delete ")) {
+                    int index = Integer.parseInt(command.split(" ")[1])- 1;
+                    Task removed = allTasks.remove(index);
+                    System.out.println(" Noted. I've removed this task:");
+                    System.out.println("   " + removed);
+                    System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
 
                 } else {
@@ -100,6 +104,10 @@ public class Clover {
 
             } catch (UnknownCommandException e) {
                 System.out.println(" Hmm... " + e.getMessage());
+                System.out.println("____________________________________________________________");
+
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(" Oh no... This is an invalid task number!");
                 System.out.println("____________________________________________________________");
 
             } catch (Exception e) {
