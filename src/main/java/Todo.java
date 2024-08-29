@@ -4,6 +4,10 @@ public class Todo extends Task {
     }
 
     @Override
+    public String saveFormat() {
+        return "T | " + super.saveFormat();
+    }
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
