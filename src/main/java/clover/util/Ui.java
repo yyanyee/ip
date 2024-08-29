@@ -1,3 +1,7 @@
+package clover.util;
+
+import clover.task.Task;
+
 import java.util.Scanner;
 public class Ui {
     private Scanner scanner;
@@ -19,7 +23,7 @@ public class Ui {
     }
     public void showWelcome() {
         System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm Clover");
+        System.out.println(" Hello! I'm clover.Clover");
         System.out.println(" What can I do for you?");
         System.out.println("____________________________________________________________");
     }

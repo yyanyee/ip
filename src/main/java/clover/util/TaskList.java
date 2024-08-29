@@ -1,3 +1,7 @@
+package clover.util;
+
+import clover.task.Task;
+
 import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> allTasks;

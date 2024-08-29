@@ -1,18 +1,24 @@
+package clover.command;
+
+import clover.task.Task;
+import clover.util.TaskList;
+import clover.util.Ui;
+import clover.util.Storage;
+
 import java.io.IOException;
 
-public class MarkCommand extends Command {
+public class DeleteCommand extends Command {
     private int index;
 
-    public MarkCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(TaskList allTasks, Ui ui, Storage storage) throws IOException {
         try {
-            Task task = allTasks.getTask(index);
-            task.markAsDone();
-            ui.showMark(task);
+            Task removed = allTasks.removeTask(index);
+            ui.showDeleteTask(removed, allTasks.size());
             storage.save(allTasks.getAllTasks());
         } catch (IndexOutOfBoundsException e) {
             ui.showError(" Oh no... This is an invalid task number!");;

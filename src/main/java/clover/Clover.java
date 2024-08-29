@@ -1,5 +1,11 @@
-import java.io.IOException;
+package clover;
 
+import clover.command.Command;
+import clover.util.Parser;
+import clover.util.Storage;
+import clover.util.TaskList;
+import clover.util.Ui;
+import java.io.IOException;
 public class Clover {
     private Storage storage;
     private TaskList allTasks;

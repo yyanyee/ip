@@ -1,3 +1,10 @@
+package clover.util;
+
+import clover.task.Deadline;
+import clover.task.Event;
+import clover.task.Task;
+import clover.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +33,7 @@ public class Storage {
             String line = scanner.nextLine();
 
             /*
-            [0]: Task, Deadline or Event
+            [0]: clover.task.Task, clover.task.Deadline or clover.task.Event
             [1]: 1 or 0
             [2]: task
             [3]: due date
