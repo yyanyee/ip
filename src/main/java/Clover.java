@@ -1,7 +1,19 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Clover {
+    private static Data data;
+    private static ArrayList<Task> allTasks;
     public static void main(String[] args) {
+        data = new Data("./data/Clover.txt");
+
+        try {
+            allTasks = data.load();
+        } catch (IOException e) {
+            System.out.println("Corrupt file: " + e.getMessage());
+            allTasks = new ArrayList<>();
+        }
+
         //greet
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm Clover");
@@ -11,7 +23,7 @@ public class Clover {
         Scanner scanner = new Scanner(System.in);
         String command;
 
-        ArrayList<Task> allTasks = new ArrayList<>();
+       //ArrayList<Task> allTasks = new ArrayList<>();
 
         while (true) {
             command = scanner.nextLine();
@@ -35,6 +47,8 @@ public class Clover {
                 } else if (command.startsWith("mark ")) {
                     int index = Integer.parseInt(command.split(" ")[1]);
                     allTasks.get(index - 1).markAsDone(); // [ ] -> [X]
+                    save();
+
                     System.out.println(" Nice! I've marked this task as done:");
                     System.out.println("   " + allTasks.get(index - 1));
                     System.out.println("____________________________________________________________");
@@ -43,6 +57,8 @@ public class Clover {
                 } else if (command.startsWith("unmark ")) {
                     int index = Integer.parseInt(command.split(" ")[1]);
                     allTasks.get(index - 1).markAsUndone(); // [X] -> [ ]
+                    save();
+
                     System.out.println(" OK, I've marked this task as not done yet:");
                     System.out.println("   " + allTasks.get(index - 1));
                     System.out.println("____________________________________________________________");
@@ -55,6 +71,8 @@ public class Clover {
                     }
 
                     allTasks.add(new Todo(description));
+                    save();
+
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   " + allTasks.get(allTasks.size() - 1));
                     System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
@@ -69,6 +87,8 @@ public class Clover {
                     String description = split[0].trim();
                     String date = split[1].trim();
                     allTasks.add(new Deadline(description, date));
+                    save();
+
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   " + allTasks.get(allTasks.size() - 1));
                     System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
@@ -81,6 +101,8 @@ public class Clover {
                     String from = times[0].trim();
                     String to = times[1].trim();
                     allTasks.add(new Event(description, from, to));
+                    save();
+
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   " + allTasks.get(allTasks.size() - 1));
                     System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
@@ -89,6 +111,8 @@ public class Clover {
                 } else if (command.startsWith("delete ")) {
                     int index = Integer.parseInt(command.split(" ")[1])- 1;
                     Task removed = allTasks.remove(index);
+                    save();
+
                     System.out.println(" Noted. I've removed this task:");
                     System.out.println("   " + removed);
                     System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
@@ -116,5 +140,14 @@ public class Clover {
             }
         }
         scanner.close();
+    }
+
+    private static void save() {
+        try {
+            data.save(allTasks);
+        } catch (IOException e) {
+            System.out.println("Corrupt file: " + e.getMessage());
+            System.out.println("____________________________________________________________");
+        }
     }
 }
