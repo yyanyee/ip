@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Data {
+public class Storage {
     private String filePath;
 
-    public Data(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
