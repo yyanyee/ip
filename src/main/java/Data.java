@@ -42,9 +42,11 @@ public class Data {
 
                 case "D": // deadline
                     task = new Deadline(split[2], split[3]);
+                    break;
 
                 case "E": // event
                     task = new Event(split[2], split[3], split[4]);
+                    break;
 
                 default: // none of the above cases
                     throw new IOException("data file is corrupt");
@@ -52,9 +54,7 @@ public class Data {
 
             if (split[1].equals("0")) {
                 task.markAsUndone();
-            }
-
-            if (split[1].equals("1")) {
+            } else if (split[1].equals("1")) {
                 task.markAsDone();
             }
 
