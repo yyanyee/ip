@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Clover {
@@ -76,7 +79,6 @@ public class Clover {
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   " + allTasks.get(allTasks.size() - 1));
                     System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
 
                 } else if (command.startsWith("deadline ")) {
                     String[] split = command.substring(9).split(" /by ");
@@ -86,7 +88,14 @@ public class Clover {
                     }
                     String description = split[0].trim();
                     String date = split[1].trim();
-                    allTasks.add(new Deadline(description, date));
+
+                    try {
+                        allTasks.add(new Deadline(description, date));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(" Date is in the incorrect format :( Re-enter please <3 ");
+                        System.out.println("____________________________________________________________");
+                        return;
+                    }
                     save();
 
                     System.out.println(" Got it. I've added this task:");
@@ -109,7 +118,7 @@ public class Clover {
                     System.out.println("____________________________________________________________");
 
                 } else if (command.startsWith("delete ")) {
-                    int index = Integer.parseInt(command.split(" ")[1])- 1;
+                    int index = Integer.parseInt(command.split(" ")[1]) - 1;
                     Task removed = allTasks.remove(index);
                     save();
 
@@ -118,6 +127,16 @@ public class Clover {
                     System.out.println(" Now you have " + allTasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
 
+                // stretch goal: new command "due" to print deadlines/events occurring on a specific date
+                } else if (command.startsWith("due ")) {
+                    String dateString = command.substring(4).trim();
+                    try {
+                        LocalDate dateDate = LocalDate.parse(dateString);
+                        tasksDue(dateDate);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date :(");
+                        System.out.println("____________________________________________________________");
+                    }
                 } else {
                     // else, unknown command
                     throw new UnknownCommandException("Unknown command!! I do not know this :(");
@@ -149,5 +168,29 @@ public class Clover {
             System.out.println("Corrupt file: " + e.getMessage());
             System.out.println("____________________________________________________________");
         }
+    }
+
+    private static void tasksDue(LocalDate date) {
+        DateTimeFormatter MMMddyyy = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        System.out.println(" Here are the tasks due on " + date.format(MMMddyyy) + ": ");
+        for (Task task : allTasks) {
+            if (task instanceof Deadline) {
+                Deadline due = (Deadline) task;
+                if (due.by.equals(date)) {
+                    System.out.println(" " + task);
+                }
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                String fromString = event.from;
+                String toString = event.to;
+                LocalDate start = LocalDate.parse(fromString);
+                LocalDate end = LocalDate.parse(toString);
+
+                if (start.equals(date) || end.equals(date)) {
+                    System.out.println(" " + task);
+                }
+            }
+        }
+        System.out.println("____________________________________________________________");
     }
 }
