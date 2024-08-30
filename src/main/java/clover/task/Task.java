@@ -25,7 +25,7 @@ public class Task {
      * @return The completion icon of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**

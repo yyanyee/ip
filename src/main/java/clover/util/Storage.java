@@ -37,12 +37,12 @@ public class Storage {
         ArrayList<Task> allTasks = new ArrayList<>();
         File file = new File(filePath);
 
-        if (!file.exists()) { //if file doesn't exist at the start
+        // Create file if it does not exist
+        if (!file.exists()) {
             createFile(file);
             return allTasks;
         }
 
-        //else, file does exist
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
