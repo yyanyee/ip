@@ -2,7 +2,18 @@ package clover.util;
 
 import clover.command.*;
 
+/**
+ * Represents a parser that interprets user input and returns the corresponding command.
+ *
+ */
 public class Parser {
+
+    /**
+     * Parses the user's input and returns the corresponding command.
+     *
+     * @param input The user's input.
+     * @return The command corresponding to the user's input.
+     */
     public static Command parse(String input) {
         String[] split = input.split(" ", 2);
         String command = split[0].toLowerCase();
