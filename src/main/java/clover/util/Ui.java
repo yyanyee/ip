@@ -1,8 +1,8 @@
 package clover.util;
 
 import clover.task.Task;
-
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Handles the interactions with the user.
@@ -44,7 +44,7 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm clover.Clover");
+        System.out.println(" Hello! I'm Clover");
         System.out.println(" What can I do for you?");
         System.out.println("____________________________________________________________");
     }
@@ -124,5 +124,22 @@ public class Ui {
      */
     public void showError(String msg) {
         System.out.println(msg);
+    }
+
+    /**
+     * Displays the list of matching tasks.
+     *
+     * @param matches The list of matching tasks.
+     */
+    public void showFindResults(ArrayList<Task> matches) {
+        if (matches.isEmpty()) {
+            System.out.println("Hmm... I can't find any matching tasks :o ");
+        } else {
+            System.out.println(" Here are the matching tasks in your list: ");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println("  "+ (i + 1) + "." + matches.get(i));
+            }
+        }
+        System.out.println("____________________________________________________________");
     }
 }

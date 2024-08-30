@@ -73,6 +73,11 @@ public class Parser {
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     return new UnknownCommand("Unknown command!! I do not know this :(");
                 }
+            case "find":
+                if (split.length < 2 || split[1].trim().isEmpty()) {
+                    return new UnknownCommand("Unknown command!! I do not know this :(");
+                }
+                return new FindCommand(split[1].trim());
             default:
                 return new UnknownCommand("Unknown command!! I do not know this :(");
         }
