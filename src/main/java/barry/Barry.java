@@ -1,16 +1,17 @@
-package clover;
+package barry;
 
-import clover.command.Command;
-import clover.util.Parser;
-import clover.util.Storage;
-import clover.util.TaskList;
-import clover.util.Ui;
+import barry.command.Command;
+import barry.util.Parser;
+import barry.util.Storage;
+import barry.util.TaskList;
+import barry.util.Ui;
 import java.io.IOException;
+import barry.Barry;
 
 /**
  * The main class for the Clover chatbot
  */
-public class Clover {
+public class Barry {
     private Storage storage;
     private TaskList allTasks;
     private Ui ui;
@@ -20,7 +21,7 @@ public class Clover {
      *
      * @param filePath The file path where tasks are stored.
      */
-    public Clover(String filePath) {
+    public Barry(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -54,12 +55,28 @@ public class Clover {
     }
 
     /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        //return "bzzz~~ Barry heard: " + input;
+        try {
+            Command command = Parser.parse(input);  // Parse user input into a command
+            command.execute(allTasks, ui, storage); // Execute the command
+            return ui.getLastMessage();             // Return the response from the UI
+        } catch (IOException e) {
+            return "Oops! An error occurred while executing the command.";
+        } catch (Exception e) {
+            return "Something went wrong: " + e.getMessage();
+        }
+    }
+
+    /**
      * The main entry point for the Clover chatbot.
      * Creates a new Clover object and starts the application.
      *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
-        new Clover("data/tasks.txt").run();
+        new Barry("data/tasks.txt").run();
     }
 }

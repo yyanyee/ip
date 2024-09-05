@@ -1,6 +1,6 @@
-package clover.util;
+package barry.util;
 
-import clover.task.Task;
+import barry.task.Task;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Ui {
     private Scanner scanner;
-
+    private String lastMessage = "";
     /**
      * Constructs a Ui object that initialises the scanner for reading the user input.
      */
@@ -36,25 +36,24 @@ public class Ui {
      * Displays the loading error used by the chatbot.
      */
     public void showLoadingError() {
-        System.out.println("loading error... :(");
+        lastMessage = "loading error... :(";
+        System.out.println(lastMessage);
     }
 
     /**
      * Displays the greeting message to the user.
      */
     public void showWelcome() {
-        System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm Clover");
-        System.out.println(" What can I do for you?");
-        System.out.println("____________________________________________________________");
+        lastMessage = "bzzz~ I am Barry B Benson. What can I do for you?";
+        System.out.println(lastMessage);
     }
 
     /**
      * Displays the goodbye message to the user.
      */
     public void showBye() {
-        System.out.println(" Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+        lastMessage = "bzzz~ bye! Hope to see you again soon!";
+        System.out.println(lastMessage);
     }
 
     /**
@@ -63,11 +62,12 @@ public class Ui {
      * @param allTasks The TaskList of all tasks of the user.
      */
     public void showList(TaskList allTasks) {
-        System.out.println(" Here are the tasks in your list:");
+        StringBuilder builder = new StringBuilder("Here are the tasks in your list: ");
         for (int i = 0; i < allTasks.size(); i++) {
-            System.out.println(" " + (i + 1) + "." + allTasks.getTask(i));
+            builder.append("\n ").append(i + 1).append(".").append(allTasks.getTask(i));
         }
-        System.out.println("____________________________________________________________");
+        lastMessage = builder.toString();
+        System.out.println(lastMessage);
     }
 
     /**
@@ -75,9 +75,8 @@ public class Ui {
      * @param task The task to be marked as done.
      */
     public void showMark(Task task) {
-        System.out.println(" Nice! I've marked this task as done:");
-        System.out.println("   " + task);
-        System.out.println("____________________________________________________________");
+        lastMessage = "Nice! I've marked this task as done:\n  " + task;
+        System.out.println(lastMessage);
     }
 
     /**
@@ -86,9 +85,8 @@ public class Ui {
      * @param task the task to be marked as undone.
      */
     public void showUnmark(Task task) {
-        System.out.println(" OK, I've marked this task as not done yet:");
-        System.out.println("   " + task);
-        System.out.println("____________________________________________________________");
+        lastMessage = " OK, I've marked this task as not done yet:\n " + task;
+        System.out.println(lastMessage);
     }
 
     /**
@@ -98,10 +96,9 @@ public class Ui {
      * @param size The current size of the task list.
      */
     public void showAddTask(Task task, int size) {
-        System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + task);
-        System.out.println(" Now you have " + size + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        lastMessage = "bzzz OK! I've added this tast:\n  " + task
+                      + "\nNow you have " + size + " tasks in the list. ";
+        System.out.println(lastMessage);
     }
 
     /**
@@ -111,10 +108,9 @@ public class Ui {
      * @param size The current size of the task list.
      */
     public void showDeleteTask(Task removed, int size) {
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println("   " + removed);
-        System.out.println(" Now you have " + size + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        lastMessage = " Noted. I've removed this task:\n   " + removed
+                        + "\nNow you have " + size + " tasks in the list. ";
+        System.out.println(lastMessage);
     }
 
     /**
@@ -123,7 +119,8 @@ public class Ui {
      * @param msg The error message to be displayed.
      */
     public void showError(String msg) {
-        System.out.println(msg);
+        lastMessage = msg;
+        System.out.println(lastMessage);
     }
 
     /**
@@ -133,13 +130,17 @@ public class Ui {
      */
     public void showFindResults(ArrayList<Task> matches) {
         if (matches.isEmpty()) {
-            System.out.println("Hmm... I can't find any matching tasks :o ");
+            lastMessage = "Hmm... I can't find any matching tasks bzz... ";
         } else {
-            System.out.println(" Here are the matching tasks in your list: ");
+            StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:");
             for (int i = 0; i < matches.size(); i++) {
-                System.out.println("  "+ (i + 1) + "." + matches.get(i));
+                builder.append("\n ").append(i + 1).append(".").append(matches.get(i));
             }
+            lastMessage = builder.toString();
         }
-        System.out.println("____________________________________________________________");
+        System.out.println(lastMessage);
+    }
+    public String getLastMessage() {
+        return lastMessage;
     }
 }

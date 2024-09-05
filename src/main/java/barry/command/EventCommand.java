@@ -1,6 +1,6 @@
-package clover.command;
+package barry.command;
 
-import clover.task.Event;
+import barry.task.Event;
 
 /**
  * Represents a command that adds an event task to the task list.

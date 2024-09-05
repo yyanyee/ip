@@ -1,4 +1,4 @@
-package clover.task;
+package barry.task;
 
 /**
  * Represents a task given by user in the chatbot.

@@ -1,6 +1,6 @@
-package clover.util;
+package barry.util;
 
-import clover.task.Task;
+import barry.task.Task;
 
 import java.util.ArrayList;
 

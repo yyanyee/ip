@@ -1,4 +1,4 @@
-package clover.task;
+package barry.task;
 
 /**
  * Represents a to-do task given by the user.

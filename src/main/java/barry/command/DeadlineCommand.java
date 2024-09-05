@@ -1,6 +1,6 @@
-package clover.command;
+package barry.command;
 
-import clover.task.Deadline;
+import barry.task.Deadline;
 
 /**
  * Represents a command that adds a deadline task to the task list.

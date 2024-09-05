@@ -1,4 +1,4 @@
-package clover.task;
+package barry.task;
 
 /**
  * Represents an event task given by the user.
