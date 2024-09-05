@@ -1,9 +1,9 @@
-package clover.util;
+package barry.util;
 
-import clover.task.Deadline;
-import clover.task.Event;
-import clover.task.Task;
-import clover.task.Todo;
+import barry.task.Deadline;
+import barry.task.Event;
+import barry.task.Task;
+import barry.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,23 +11,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the database that store's the user's tasks to and from a file.
+ *
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filePath The path of the file where tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the file into an ArrayList of all tasks.
+     *
+     * @return An ArrayList of tasks loaded from the file.
+     * @throws IOException If an input or output error occurs.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> allTasks = new ArrayList<>();
         File file = new File(filePath);
 
-        if (!file.exists()) { //if file doesn't exist at the start
+        // Create file if it does not exist
+        if (!file.exists()) {
             createFile(file);
             return allTasks;
         }
 
-        //else, file does exist
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -71,6 +86,12 @@ public class Storage {
         return allTasks;
     }
 
+    /**
+     * Creates a new file.
+     *
+     * @param file The file to be created.
+     * @throws IOException If an input or output error occurs.
+     */
     public void createFile(File file) throws IOException {
         if (file.getParentFile() != null) {
             file.getParentFile().mkdirs();
@@ -78,6 +99,12 @@ public class Storage {
         file.createNewFile();
     }
 
+    /**
+     * Saves the current list of all tasks to the file.
+     *
+     * @param tasks An ArrayList of tasks to be saved to the file.
+     * @throws IOException If an input or output error occurs.
+     */
     public void save(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         for (Task task : tasks) {

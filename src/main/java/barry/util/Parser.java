@@ -1,8 +1,19 @@
-package clover.util;
+package barry.util;
 
-import clover.command.*;
+import barry.command.*;
 
+/**
+ * Represents a parser that interprets user input and returns the corresponding command.
+ *
+ */
 public class Parser {
+
+    /**
+     * Parses the user's input and returns the corresponding command.
+     *
+     * @param input The user's input.
+     * @return The command corresponding to the user's input.
+     */
     public static Command parse(String input) {
         String[] split = input.split(" ", 2);
         String command = split[0].toLowerCase();
@@ -62,6 +73,11 @@ public class Parser {
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     return new UnknownCommand("Unknown command!! I do not know this :(");
                 }
+            case "find":
+                if (split.length < 2 || split[1].trim().isEmpty()) {
+                    return new UnknownCommand("Unknown command!! I do not know this :(");
+                }
+                return new FindCommand(split[1].trim());
             default:
                 return new UnknownCommand("Unknown command!! I do not know this :(");
         }
