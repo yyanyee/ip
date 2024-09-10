@@ -1,5 +1,2 @@
-T | 0 | run
-T | 0 | complete assignment
-E | 0 | project meeting | 2024-09-06 17:00 | 2024-09-06 18:00
-D | 0 | submit report | 2024-09-10
-T | 1 | die
+T | 1 | run
+T | 1 | sleep
