@@ -15,6 +15,7 @@ public class Parser {
      * @return The command corresponding to the user's input.
      */
     public static Command parse(String input) {
+        assert input != null : "command cannot be null!";
         String[] split = input.split(" ", 2);
         String command = split[0].toLowerCase();
 

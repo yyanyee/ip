@@ -1,6 +1,7 @@
 package barry;
 
 import barry.command.Command;
+import barry.task.Task;
 import barry.util.Parser;
 import barry.util.Storage;
 import barry.util.TaskList;
@@ -42,6 +43,8 @@ public class Barry {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
+                assert fullCommand != null : "command cannot be null!";
+
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(allTasks, ui, storage);
@@ -58,11 +61,10 @@ public class Barry {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        //return "bzzz~~ Barry heard: " + input;
         try {
-            Command command = Parser.parse(input);  // Parse user input into a command
-            command.execute(allTasks, ui, storage); // Execute the command
-            return ui.getLastMessage();             // Return the response from the UI
+            Command command = Parser.parse(input);
+            command.execute(allTasks, ui, storage);
+            return ui.getLastMessage();
         } catch (IOException e) {
             return "Oops! An error occurred while executing the command.";
         } catch (Exception e) {
@@ -77,6 +79,9 @@ public class Barry {
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
-        new Barry("data/tasks.txt").run();
+   //     new Barry("data/tasks.txt").run();
+        Barry barry = new Barry("data/tasks.txt");
+        TaskList tasks = barry.allTasks;
+        tasks.getTask(-1);
     }
 }
