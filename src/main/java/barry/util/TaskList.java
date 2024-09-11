@@ -33,6 +33,7 @@ public class TaskList {
      * @param task The task to be added to the list of all tasks.
      */
     public void addTask(Task task) {
+        assert task != null : "Task cannot be null!";
         allTasks.add(task);
     }
 
@@ -43,6 +44,7 @@ public class TaskList {
      * @return The task that was removed from the task list.
      */
     public Task removeTask(int i) {
+        assert i >= 0 && i < allTasks.size() : "index is out of valid range of tasks :(";
         return allTasks.remove(i);
     }
 
@@ -53,6 +55,7 @@ public class TaskList {
      * @return The task to be retrieved.
      */
     public Task getTask(int i) {
+        assert i >= 0 && i < allTasks.size() : "Index out of bounds: " + i;
         return allTasks.get(i);
     }
 
