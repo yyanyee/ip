@@ -10,7 +10,8 @@ import barry.util.Ui;
 public class HelpCommand extends Command {
     @Override
     public void execute(TaskList allTasks, Ui ui, Storage storage) {
-        ui.showHelp();
+        String helpMessage = ui.showHelp();
+        ui.showMessage(helpMessage);
     }
 
     @Override

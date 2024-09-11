@@ -143,21 +143,27 @@ public class Ui {
     /**
      * Displays the list of available commands and their descriptions.
      */
-    public void showHelp() {
-        System.out.println("Here are the commands you can use:");
-        System.out.println("  bye      - Exits the program");
-        System.out.println("  list     - Lists all tasks");
-        System.out.println("  todo     - Adds a todo task");
-        System.out.println("  deadline - Adds a task with a deadline");
-        System.out.println("  event    - Adds an event with a start and end time");
-        System.out.println("  mark     - Marks a task as done");
-        System.out.println("  unmark   - Marks a task as not done");
-        System.out.println("  delete   - Deletes a task");
-        System.out.println("  find     - Finds tasks by keyword");
-        System.out.println("  help     - Shows this help page");
-        System.out.println("____________________________________________________________");
+    public String showHelp() {
+        String helpMessage = "Here are the commands you can use:" +
+                "\n  bye - Exits the program" +
+                "\n  list - Lists all tasks" +
+                "\n  todo <description> - Adds a todo task" +
+                "\n  deadline <description> /by <yyyy-mm-dd> - Adds a task with a deadline" +
+                "\n  event <description> /from <start date/time> /to <start date/time> - Adds an event " +
+                "\n   with a start and end time" +
+                "\n  mark <index> - Marks a task as done" +
+                "\n  unmark <index> - Marks a task as not done" +
+                "\n  delete <index> - Deletes a task" +
+                "\n  find <keyword> - Finds tasks by keyword" +
+                "\n  help - Shows this help page";
+        return helpMessage;
     }
     public String getLastMessage() {
         return lastMessage;
     }
+    public void showMessage(String message) {
+        lastMessage = message;
+        System.out.println(message);
+    }
+
 }

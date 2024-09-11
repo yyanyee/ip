@@ -79,9 +79,9 @@ public class Barry {
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
-   //     new Barry("data/tasks.txt").run();
-        Barry barry = new Barry("data/tasks.txt");
-        TaskList tasks = barry.allTasks;
-        tasks.getTask(-1);
+        new Barry("data/tasks.txt").run();
+//        Barry barry = new Barry("data/tasks.txt");
+//        TaskList tasks = barry.allTasks;
+//        tasks.getTask(-1);
     }
 }

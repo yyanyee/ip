@@ -105,18 +105,11 @@ public class Parser {
                             "\n find <keyword>");
                 }
                 return new FindCommand(split[1].trim());
+            case HELP:
+                return new HelpCommand();
             default:
                 return new UnknownCommand("Unknown command..." +
-                        "\nHere is a list of commands:" +
-                        "\n  bye" +
-                        "\n  list" +
-                        "\n  mark" +
-                        "\n  unmark" +
-                        "\n  todo" +
-                        "\n  deadline" +
-                        "\n  event" +
-                        "\n  delete" +
-                        "\n  find");
+                        "Use 'Help' command for more information bzz~");
         }
     }
 }
