@@ -88,7 +88,7 @@ public class Ui {
      * @param size The current size of the task list.
      */
     public void showAddTask(Task task, int size) {
-        lastMessage = "bzzz OK! I've added this tast:\n  " + task
+        lastMessage = "bzzz OK! I've added this task:\n  " + task
                       + "\nNow you have " + size + " tasks in the list. ";
         System.out.println(lastMessage);
     }
