@@ -41,14 +41,6 @@ public class Ui {
     }
 
     /**
-     * Displays the greeting message to the user.
-     */
-    public void showWelcome() {
-        lastMessage = "bzzz~ I am Barry B Benson. What can I do for you?";
-        System.out.println(lastMessage);
-    }
-
-    /**
      * Displays the goodbye message to the user.
      */
     public void showBye() {
