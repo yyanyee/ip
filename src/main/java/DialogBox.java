@@ -22,18 +22,28 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    public DialogBox(String text, Image img, boolean isUser) {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(this);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // Set the dialog text and display picture
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        // Check if the dialog is for the user or bot and apply appropriate styles
+        if (isUser) {
+            // Style for user dialog box
+            this.setStyle("-fx-background-color: rgba(242, 242, 138, 0.8); -fx-background-radius: 20; -fx-border-color: black; -fx-border-radius: 20; -fx-padding: 15;");
+        } else {
+            // Style for bot dialog box
+            this.setStyle("-fx-background-color: rgba(240, 240, 204, 0.8); -fx-background-radius: 20; -fx-border-color: black; -fx-border-radius: 20; -fx-padding: 15;");
+        }
     }
 
     /**
@@ -47,11 +57,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, true);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, false);
         db.flip();
         return db;
     }
