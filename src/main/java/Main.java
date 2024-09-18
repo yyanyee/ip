@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import barry.Barry;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Barry using FXML.
  */
 public class Main extends Application {
 

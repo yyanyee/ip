@@ -140,7 +140,30 @@ public class Ui {
         }
         System.out.println(lastMessage);
     }
+    /**
+     * Displays the list of available commands and their descriptions.
+     */
+    public String showHelp() {
+        String helpMessage = "Here are the commands you can use:" +
+                "\n  bye - Exits the program" +
+                "\n  list - Lists all tasks" +
+                "\n  todo <description> - Adds a todo task" +
+                "\n  deadline <description> /by <yyyy-mm-dd> - Adds a task with a deadline" +
+                "\n  event <description> /from <start date/time> /to <start date/time> - Adds an event " +
+                "\n   with a start and end time" +
+                "\n  mark <index> - Marks a task as done" +
+                "\n  unmark <index> - Marks a task as not done" +
+                "\n  delete <index> - Deletes a task" +
+                "\n  find <keyword> - Finds tasks by keyword" +
+                "\n  help - Shows this help page";
+        return helpMessage;
+    }
     public String getLastMessage() {
         return lastMessage;
     }
+    public void showMessage(String message) {
+        lastMessage = message;
+        System.out.println(message);
+    }
+
 }
