@@ -23,6 +23,10 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(barry);  // inject the Duke instance
             stage.show();
+
+            MainWindow controller = fxmlLoader.getController();
+            controller.setDuke(barry);
+            controller.displayWelcomeMessage();
         } catch (IOException e) {
             e.printStackTrace();
         }
