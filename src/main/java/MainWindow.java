@@ -49,5 +49,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+    public void displayWelcomeMessage() {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(barry.getWelcomeMessage(), barryImage));
+    }
 
 }

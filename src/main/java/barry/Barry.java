@@ -38,23 +38,28 @@ public class Barry {
      * Reads the user input, parses it into commands and executes the command.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 assert fullCommand != null : "command cannot be null!";
 
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(allTasks, ui, storage);
                 isExit = c.isExit();
             } catch (IOException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
+    }
+    /**
+     * Generate a welcome message when user opens the chatbot.
+     */
+    public String getWelcomeMessage() {
+        return "bzzz~ I am Barry B Benson <3 " +
+                "\n What can I do for you? " +
+                "\n " +
+                "\n Enter 'help' for more information~ ";
     }
 
     /**
@@ -73,15 +78,13 @@ public class Barry {
     }
 
     /**
-     * The main entry point for the Clover chatbot.
-     * Creates a new Clover object and starts the application.
+     * The main entry point for the Barry chatbot.
+     * Creates a new Barry object and starts the application.
      *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         new Barry("data/tasks.txt").run();
-//        Barry barry = new Barry("data/tasks.txt");
-//        TaskList tasks = barry.allTasks;
-//        tasks.getTask(-1);
+
     }
 }
