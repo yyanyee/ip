@@ -1,5 +1,5 @@
 # Barry User Guide
-![Ui.png](Ui.png)
+![Ui Image](./Ui.png)
 
 Barry is a friendly, text-based chatbot designed to help you manage your task with ease.
 Whether you need to track simple to-dos, deadlines with specific dates, or events with
