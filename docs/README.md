@@ -1,5 +1,5 @@
 # Barry User Guide
-![Ui.png](Ui.png)
+![Ui Image](./Ui.png)
 
 Barry is a friendly, text-based chatbot designed to help you manage your task with ease.
 Whether you need to track simple to-dos, deadlines with specific dates, or events with
@@ -7,7 +7,7 @@ start and end times, Barry is here to assist. Barry operates via text input, mak
 and easy to manage your tasks.
 
 ## Adding ToDos
-The `todo` command allows you to add a task 
+The `todo` command allows you to add a task
 ```
 todo <description>
 ```
@@ -62,7 +62,7 @@ Now you have 3 tasks in the list.
 ```
 
 ## Listing All tasks
-The `list` command allows you to add a task with a specific deadline (in the yyyy-mm-dd format).
+The `list` command allows you to list all tasks in the task list.
 ``` 
 list
 ```
