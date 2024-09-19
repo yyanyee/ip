@@ -62,7 +62,7 @@ Now you have 3 tasks in the list.
 ```
 
 ## Listing All tasks
-The `list` command allows you to add a task with a specific deadline (in the yyyy-mm-dd format).
+The `list` command allows you to list all tasks in the task list.
 ``` 
 list
 ```
